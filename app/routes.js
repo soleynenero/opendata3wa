@@ -1,4 +1,3 @@
-// creation
 const User = require("./models/UserModel");
 
 module.exports = function(app){
@@ -13,6 +12,7 @@ module.exports = function(app){
     });
 
     app.get('/login', function(req,res){
+        req.flash("danger","opps erreur fatale");
         res.render("login");
     })
 
@@ -21,7 +21,7 @@ module.exports = function(app){
     })
 
     app.post('/register',function(req,res){
-        console.log(req.body);
+        // console.log(req.body);
         // on appelle la fonction signup qui se trouve dans le model user les paramètres utilisés sont ceux des names du formulaire
         User.signup(
             req.body.firstname,
@@ -30,9 +30,10 @@ module.exports = function(app){
             req.body.password,
             req.body.password_confirmation
         ).then(()=>{
-            res.redirect("/?register=ok")
+            req.flash('success',"Inscription réussie ! Vous pouvez maintenant vous connecter.")
+            res.redirect("/") // redirection vers la page d'accueil
         }).catch(errors =>{
-            res.render("register.pug", {errors, user: req.body})
+            res.render("register", {errors, user: req.body})
         })
     })
 }

@@ -18,7 +18,14 @@ html(lang="en")
                     a(href="login") Connexion
                 li
                     a(href="register") Inscription
-                            
+
+        //- message = valeur , kind est la clé du message on a un exemple qui est que la clé est sucess
+        each messages, kind in flashMessages
+            <div class="alert alert-#{kind} alert-flash">
+                each message in messages
+                    | #{message}
+            </div>
+
         div(class="container")
             div(class="element")
                 block content

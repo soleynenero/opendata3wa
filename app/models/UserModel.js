@@ -71,6 +71,10 @@ userShema.statics.signup = function (firstname,lastname,email,pass,pass_confirma
     })
 };
 
+userShema.statics.signin = function(email,pass){
+
+}
+
 // creation de notre model : mongoose.model('[nomModel]',[nomShemaDuModel])
 // export du model
 module.exports = mongoose.model("User",userShema)
